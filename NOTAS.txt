@@ -1,0 +1,9 @@
+blocking vs no blocking I/O
+
+en node hay que trabajar de modo no blocking(no bloqueante) para aprovechar el maximo poder de nodejs, pero en todos los lenguajes se tiene que trabajar de esta manera
+
+cuando trabajas en la consola del navegador y te devuelve undefined, es porque cualquier funcion que se ejecute tiene que tener un retorno, entonces cuando trabajas en la consola y no retornas nada, ese valor sale undefined en la consola, ej.: let nombre= 'Luis' 
+console.log(nombre), esto devuelve Luis y undefined porque no tiene un retorno
+
+SetTimeout es una funcion no blocking( no bloqueante)
+
