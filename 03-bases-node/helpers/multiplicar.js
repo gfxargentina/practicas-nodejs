@@ -1,4 +1,5 @@
 const fs = require('fs');
+const colors = require('colors');
 
 //cuando le pones el async a una funcion, por defecto ya esta regresando una promesa
 //y se maneja con el try and catch
@@ -12,9 +13,9 @@ const crearArchivo = async (base, listar) => {
     }
 
     if (listar) {
-      console.log('======================');
+      console.log('======================'.green);
       console.log('Tabla del', base);
-      console.log('======================');
+      console.log('======================'.green);
 
       console.log(salida);
     }
