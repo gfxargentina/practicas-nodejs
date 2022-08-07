@@ -20,7 +20,7 @@ const crearArchivo = async (base, listar) => {
       console.log(salida);
     }
 
-    fs.writeFileSync(`tabla-${base}.txt`, salida);
+    fs.writeFileSync(`./output/tabla-${base}.txt`, salida);
 
     return `tabla-${base}.txt`;
 
