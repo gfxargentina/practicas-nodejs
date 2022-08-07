@@ -2,12 +2,8 @@ const fs = require('fs');
 
 //cuando le pones el async a una funcion, por defecto ya esta regresando una promesa
 //y se maneja con el try and catch
-const crearArchivo = async (base) => {
+const crearArchivo = async (base, listar) => {
   try {
-    console.log('======================');
-    console.log('Tabla del', base);
-    console.log('======================');
-
     let salida = '';
 
     // alt+92: barra invertida \, \n: salto de linea
@@ -15,11 +11,23 @@ const crearArchivo = async (base) => {
       salida += `${base} x ${i} = ${base * i}\n`;
     }
 
-    fs.writeFile(`tabla-${base}.txt`, salida, (err) => {
-      if (err) throw err;
+    if (listar) {
+      console.log('======================');
+      console.log('Tabla del', base);
+      console.log('======================');
 
-      return `tabla-${base}.txt`;
-    });
+      console.log(salida);
+    }
+
+    fs.writeFileSync(`tabla-${base}.txt`, salida);
+
+    return `tabla-${base}.txt`;
+
+    // fs.writeFile(`tabla-${base}.txt`, salida, (err) => {
+    //   if (err) throw err;
+
+    //   return `tabla-${base}.txt`;
+    // });
   } catch (error) {
     throw error;
   }
