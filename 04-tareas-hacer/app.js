@@ -1,6 +1,8 @@
+const { inquirerMenu, pausa } = require('./helpers/inquirer');
 require('colors');
 
-const { mostrarMenu, pausa } = require('./helpers/mensajes');
+//menu creado manualmente sin librerias
+//const { mostrarMenu, pausa } = require('./helpers/mensajes');
 
 console.clear();
 
@@ -8,10 +10,13 @@ const main = async () => {
   let opt = '';
 
   do {
-    opt = await mostrarMenu();
+    opt = await inquirerMenu();
     console.log({ opt });
 
-    if (opt !== '0') await pausa();
+    await pausa();
+
+    //para usar con el menu creado manualmente sin librerias
+    //if (opt !== '0') await pausa();
 
     //mientras opt no sea igual a 0 string se ejecuta lo de arriba
     //en los do while siempre usar promesas si no se genera un ciclo infinito
