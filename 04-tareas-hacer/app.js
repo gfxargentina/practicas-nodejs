@@ -1,4 +1,5 @@
 const { inquirerMenu, pausa } = require('./helpers/inquirer');
+const Tareas = require('./models/tareas');
 require('colors');
 
 //menu creado manualmente sin librerias
