@@ -31,6 +31,24 @@ class Tareas {
     const tarea = new Tarea(desc);
     this._listado[tarea.id] = tarea;
   }
+
+  listadoCompleto() {
+    //para hacer un espacio
+    console.log();
+
+    this.listadoArr.forEach((tarea, i) => {
+      //para mostrar las tareas en orden 1,2,3..., esto se hace porque sino
+      //vendria con la posicion del array 0,1,2...
+      const index = `${i + 1}`.green;
+
+      //desestructuro la descripcion y el completadoEn de la tarea
+      const { desc, completadoEn } = tarea;
+      //muestro el estado de manera condicional
+      const estado = completadoEn ? 'Completada'.green : 'Pendiente'.red;
+      //la salida
+      console.log(`${index} ${desc} :: ${estado}`);
+    });
+  }
 }
 
 module.exports = Tareas;
