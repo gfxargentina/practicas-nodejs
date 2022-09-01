@@ -14,11 +14,11 @@ const main = async () => {
 
   //para leer las tareas
   const tareasDB = leerDB();
+  //cargar las tareas
   if (tareasDB) {
     //establecer las tareas
+    tareas.cargarTareasFromArray(tareasDB);
   }
-
-  await pausa();
 
   do {
     //guarda la opcion del menu en la variable opt

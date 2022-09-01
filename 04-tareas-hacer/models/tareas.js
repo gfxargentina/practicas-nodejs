@@ -7,7 +7,7 @@ class Tareas {
   get listadoArr() {
     const listado = [];
 
-    //Object.keys devuelve un array de las propiedades del objeto, 
+    //Object.keys devuelve un array de las propiedades del objeto,
     //con el forEach lo recorro al array y pusheo el resultado al array listado
     Object.keys(this._listado).forEach((key) => {
       const tarea = this._listado[key];
@@ -19,6 +19,12 @@ class Tareas {
 
   constructor() {
     this._listado = {};
+  }
+
+  cargarTareasFromArray(tareas = []) {
+    tareas.forEach((tarea) => {
+      this._listado[tarea.id] = tarea;
+    });
   }
 
   crearTarea(desc = '') {
