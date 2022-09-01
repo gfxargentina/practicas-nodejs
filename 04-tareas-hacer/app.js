@@ -1,4 +1,4 @@
-const { guardarDb } = require('./helpers/guardarArchivo');
+const { guardarDb, leerDB } = require('./helpers/guardarArchivo');
 const { inquirerMenu, pausa, leerInput } = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
 require('colors');
@@ -11,6 +11,14 @@ console.clear();
 const main = async () => {
   let opt = '';
   const tareas = new Tareas();
+
+  //para leer las tareas
+  const tareasDB = leerDB();
+  if (tareasDB) {
+    //establecer las tareas
+  }
+
+  await pausa();
 
   do {
     //guarda la opcion del menu en la variable opt
