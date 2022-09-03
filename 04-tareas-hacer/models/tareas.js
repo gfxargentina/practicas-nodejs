@@ -69,7 +69,9 @@ class Tareas {
         //mostrar completadas
         if (completadoEn) {
           contador += 1;
-          console.log(`${(contador + '.').green} ${desc} :: ${estado}`);
+          console.log(
+            `${(contador + '.').green} ${desc} :: ${completadoEn.green}`
+          );
         }
       } else {
         //mostrar pendientes
@@ -77,6 +79,29 @@ class Tareas {
           contador += 1;
           console.log(`${(contador + '.').green} ${desc} :: ${estado}`);
         }
+      }
+    });
+  }
+
+  //completar tareas
+  toggleCompletadas(ids = []) {
+    ids.forEach((id) => {
+      const tarea = this._listado[id];
+      if (!tarea.completadoEn) {
+        tarea.completadoEn = new Date().toISOString();
+      }
+    });
+
+    //para quitarle el completado a la tarea
+    this.listadoArr.forEach((tarea) => {
+      //si en el array ids no existe el tarea.id
+      if (!ids.includes(tarea.id)) {
+        //esta es la tarea a la que hay que quitarle el completado
+        const tareaok = this._listado[tarea.id];
+        tareaok.completadoEn = null;
+
+        //este codigo hace lo mismo que el de arriba, hace directamente referencia a la propiedad del objeto
+        //this._listado[id].completadoEn = null;
       }
     });
   }
