@@ -8,14 +8,14 @@ const main = async () => {
 
   do {
     opcion = await inquirerMenu();
-    console.log({ opcion });
+    //console.log({ opcion });
 
     switch (opcion) {
       case 1:
         //mostrar mensaje
         const lugar = await leerInput('Ciudad: ');
-        console.log(lugar);
         //buscar los lugares
+        await busquedas.ciudad(lugar);
 
         //seleccionar el lugar
 
