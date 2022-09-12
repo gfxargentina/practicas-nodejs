@@ -23,7 +23,13 @@ class Busquedas {
         params: this.paramsMapbox,
       });
       const resp = await instance.get();
-      console.log(resp);
+
+      return resp.data.features.map((lugar) => ({
+        id: lugar.id,
+        nombre: lugar.place_name,
+        lng: lugar.center[0],
+        lat: lugar.center[1],
+      }));
     } catch (error) {}
 
     return []; //retorna todos los lugares que coincidan con el argumento enviado
