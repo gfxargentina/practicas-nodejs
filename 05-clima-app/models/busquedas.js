@@ -32,7 +32,41 @@ class Busquedas {
       }));
     } catch (error) {}
 
-    return []; //retorna todos los lugares que coincidan con el argumento enviado
+    return [];
+  }
+
+  //getter de los parametros de la api openweather
+  get paramsWeather() {
+    return {
+      appid: process.env.OPENWEATHER_KEY,
+      units: 'metric',
+      lang: 'es',
+    };
+  }
+
+  async climaLugar(lat, lon) {
+    try {
+      //instancia de axios
+      const instance = axios.create({
+        baseURL: `http://api.openweathermap.org/data/2.5/weather`,
+        params: { ...this.paramsWeather, lat, lon },
+      });
+
+      const resp = await instance.get();
+      const { weather, main } = resp.data;
+
+      //weather es un array de objetos por eso se le pone [] para que lo muestre bien y no salga undefined
+      return {
+        desc: weather[0].description,
+        min: main.temp_min,
+        max: main.temp_max,
+        temp: main.temp,
+      };
+
+      //res.data
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

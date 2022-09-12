@@ -30,15 +30,21 @@ const main = async () => {
         const lugarSeleccionado = lugares.find((lugar) => lugar.id === id);
 
         //datos del clima
+        const clima = await busquedas.climaLugar(
+          lugarSeleccionado.lat,
+          lugarSeleccionado.lng
+        );
 
         //mostrar resultados
+        console.clear();
         console.log('\nInformacion de la ciudad\n'.green);
-        console.log('Ciudad:', lugarSeleccionado.nombre);
+        console.log('Ciudad:', lugarSeleccionado.nombre.green);
         console.log('Latitud:', lugarSeleccionado.lat);
         console.log('Longitud:', lugarSeleccionado.lng);
-        console.log('Temperatura:');
-        console.log('TemMinima:');
-        console.log('TempMaxima:');
+        console.log('Temperatura:', clima.temp);
+        console.log('TemMinima:', clima.min);
+        console.log('TempMaxima:', clima.max);
+        console.log('Como esta el clima:', clima.desc.green);
     }
 
     //si la opcion del menu no es igual a 0 el programa sigue andando,
