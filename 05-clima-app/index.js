@@ -27,7 +27,12 @@ const main = async () => {
 
         //seleccionar el lugar
         const id = await listarLugares(lugares);
+
+        if (id === '0') continue;
         const lugarSeleccionado = lugares.find((lugar) => lugar.id === id);
+
+        //guardar en db
+        busquedas.agregarHistorial(lugarSeleccionado.nombre);
 
         //datos del clima
         const clima = await busquedas.climaLugar(
@@ -45,6 +50,17 @@ const main = async () => {
         console.log('TemMinima:', clima.min);
         console.log('TempMaxima:', clima.max);
         console.log('Como esta el clima:', clima.desc.green);
+
+        break;
+
+      case 2:
+        busquedas.historialCapitalizado.forEach((lugar, i) => {
+          const indice = `${i + 1}.`.green;
+
+          console.log(`${indice} ${lugar}`);
+        });
+
+        break;
     }
 
     //si la opcion del menu no es igual a 0 el programa sigue andando,
