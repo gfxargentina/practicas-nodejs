@@ -1,11 +1,20 @@
 const { application } = require('express');
+var hbs = require('hbs');
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
+const port = process.env.PORT;
+
+//handlebars
+app.set('view engine', 'hbs');
+//partials de hbs
+hbs.registerPartials(__dirname + '/views/partials', function (err) {
+  console.log(err);
+});
 
 //servir contenido estatico
 app.use(express.static('public'));
-
-const port = 3000;
 
 //funcion tradicional
 // app.get('/', function (req, res) {
@@ -18,13 +27,28 @@ app.get('/pagina1', (req, res) => {
   res.send('Hello World');
 });
 
+//endpoint renderizado con handlebars
+app.get('/', (req, res) => {
+  res.render('home', {
+    nombre: 'Luis',
+    titulo: 'Practica NodeJS',
+  });
+});
+
+// app.get('/generic', (req, res) => {
+//   res.sendFile(__dirname + '/public/generic.html');
+// });
 app.get('/generic', (req, res) => {
-  res.sendFile(__dirname + '/public/generic.html');
+  res.render('generic');
 });
 
 app.get('/elements', (req, res) => {
-  res.sendFile(__dirname + '/public/elements.html');
+  res.render('elements');
 });
+
+// app.get('/elements', (req, res) => {
+//   res.sendFile(__dirname + '/public/elements.html');
+// });
 
 //cuando la ruta es incorrecta cae en este endpoint
 // app.get('*', function (req, res) {
