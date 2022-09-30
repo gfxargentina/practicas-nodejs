@@ -18,6 +18,14 @@ app.get('/pagina1', (req, res) => {
   res.send('Hello World');
 });
 
+app.get('/generic', (req, res) => {
+  res.sendFile(__dirname + '/public/generic.html');
+});
+
+app.get('/elements', (req, res) => {
+  res.sendFile(__dirname + '/public/elements.html');
+});
+
 //cuando la ruta es incorrecta cae en este endpoint
 // app.get('*', function (req, res) {
 //   res.send('404 | Page Not Found');
