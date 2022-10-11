@@ -12,7 +12,7 @@ router.get('/', getUsuarios);
 
 router.post('/', newUsuario);
 
-router.put('/', updateUsuario);
+router.put('/:id', updateUsuario);
 
 router.delete('/', deleteUsuario);
 

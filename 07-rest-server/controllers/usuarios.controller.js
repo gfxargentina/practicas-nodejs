@@ -1,3 +1,4 @@
+//autocompletado del res
 const { response } = require('express');
 
 const getUsuarios = (req, res = response) => {
