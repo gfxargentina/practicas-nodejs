@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 const {
   getUsuarios,
   usuariosPost,
@@ -7,6 +8,7 @@ const {
 } = require('../controllers/usuarios.controller');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { esRoleValido } = require('../helpers/db-validators');
 
 const router = Router();
 
@@ -20,7 +22,8 @@ router.post(
     check('password', 'El password debe de ser de mas de 6 letras').isLength({
       min: 6,
     }),
-    check('rol', 'No es un Rol valido').isIn(['ADMIN', 'USER']),
+    //check('rol', 'No es un Rol valido').isIn(['ADMIN', 'USER']),
+    check('rol').custom(esRoleValido),
     validarCampos,
   ],
   usuariosPost
