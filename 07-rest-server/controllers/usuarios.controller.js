@@ -27,9 +27,22 @@ const usuariosPost = async (req, res = response) => {
   });
 };
 
-const updateUsuario = (req, res = response) => {
+const updateUsuario = async (req, res = response) => {
+  const { id } = req.params;
+
+  //desestructura para que no venga el password y google, todo lo demas de la req viene en el resto
+  const { _id, password, google, correo, ...resto } = req.body;
+
+  if (password) {
+    const salt = bcryptjs.genSaltSync();
+    resto.password = bcryptjs.hashSync(password, salt);
+  }
+
+  const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
+
   res.json({
-    msg: 'update usuarios',
+    msg: 'usuario actualizaddo',
+    usuario,
   });
 };
 
