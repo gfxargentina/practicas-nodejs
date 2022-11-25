@@ -15,13 +15,6 @@ const usuariosPost = async (req, res = response) => {
   //instancia de nuevo usuario
   const usuario = new Usuario({ nombre, correo, password, rol });
 
-  const existeEmail = await Usuario.findOne({ correo });
-  if (existeEmail) {
-    return res.status(400).json({
-      msg: 'el correo ya esta registrado ',
-    });
-  }
-
   //para encriptar tiene un valor por defecto de 10 genSaltSync(10)
   const salt = bcryptjs.genSaltSync();
   usuario.password = bcryptjs.hashSync(password, salt);
