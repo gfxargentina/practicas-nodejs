@@ -3,9 +3,15 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 const bcryptjs = require('bcryptjs');
 
-const getUsuarios = (req, res = response) => {
+const getUsuarios = async (req, res = response) => {
+  const { limite = 5, desde = 0 } = req.query;
+
+  const usuarios = await Usuario.find()
+    .skip(Number(desde))
+    .limit(Number(limite));
+
   res.json({
-    msg: 'get usuarios',
+    usuarios,
   });
 };
 
