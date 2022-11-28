@@ -61,9 +61,22 @@ const updateUsuario = async (req, res = response) => {
   });
 };
 
-const deleteUsuario = (req, res = response) => {
+const deleteUsuario = async (req, res = response) => {
+  const { id } = req.params;
+
+  //borrado fisico
+  //const usuario = await Usuario.findByIdAndDelete(id);
+
+  //borrado logico
+  const usuario = await Usuario.findByIdAndUpdate(
+    id,
+    { estado: false },
+    { new: true } //para que devuelva el usuario actualizado
+  );
+
   res.json({
-    msg: 'delete usuarios',
+    msg: 'Usuario Borrado',
+    usuario,
   });
 };
 
