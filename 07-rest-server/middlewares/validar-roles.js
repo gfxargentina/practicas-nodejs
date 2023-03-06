@@ -21,4 +21,25 @@ const esAdminRole = (req, res = response, next) => {
   next();
 };
 
-module.exports = { esAdminRole };
+//operador rest ..., cuando se lo usa en el argumento de una funcion trae un array de todos los
+//argumentos que se le pasen
+const tieneRol = (...roles) => {
+  //retorna una funcion
+  return (req, res = response, next) => {
+    if (!req.usuario) {
+      return res.status(500).json({
+        msg: 'Se quiere verificar el role sin validar el token primero',
+      });
+    }
+
+    //si entre los roles que me estan enviando no inluye req.usuario.rol manda error unathorized
+    if (!roles.includes(req.usuario.rol)) {
+      return res.status(401).json({
+        msg: `El servicio require uno de estos roles ${roles}`,
+      });
+    }
+    next();
+  };
+};
+
+module.exports = { esAdminRole, tieneRol };

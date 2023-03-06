@@ -67,6 +67,13 @@ const deleteUsuario = async (req, res = response) => {
   //borrado fisico
   //const usuario = await Usuario.findByIdAndDelete(id);
 
+  //verifica que existe el usuario
+  const usuarioABorrar = await Usuario.findById(id);
+
+  if (usuarioABorrar.estado === false) {
+    return res.status(400).json({ msg: 'El usuario no existe' });
+  }
+
   //borrado logico
   const usuario = await Usuario.findByIdAndUpdate(
     id,
