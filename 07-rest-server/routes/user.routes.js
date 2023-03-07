@@ -8,9 +8,13 @@ const {
 } = require('../controllers/usuarios.controller');
 const { check } = require('express-validator');
 
-const { validarCampos } = require('../middlewares/validar-campos');
-const validarJWT = require('../middlewares/validar-jwt');
-const { esAdminRole, tieneRol } = require('../middlewares/validar-roles');
+//optimizacion de importaciones
+const {
+  validarCampos,
+  validarJWT,
+  esAdminRole,
+  tieneRol,
+} = require('../middlewares');
 
 const {
   esRoleValido,
